@@ -27,3 +27,6 @@
 /config/master.key
 
 .env
+.rbenv-vars
+
+/config/credentials/production.key

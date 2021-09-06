@@ -30,10 +30,19 @@ gem 'rack-cors'
 gem 'dotenv-rails'
 gem 'devise'
 
-gem 'capistrano'
-gem 'capistrano-rails'
-gem 'capistrano-passenger'
+# gem 'capistrano'
+# gem 'capistrano-rails'
+gem "ed25519"
+gem "bcrypt_pbkdf"
 gem 'capistrano-rbenv'
+
+group :development, :production do
+  gem 'capistrano', '~> 3.0', require: false
+  gem 'capistrano-passenger'
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  # gem 'capistrano-rbenv', github: 'capistrano/rbenv', require: false
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
