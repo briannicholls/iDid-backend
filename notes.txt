@@ -1,0 +1,2 @@
+ruby command path: /home/deploy/.rbenv/versions/3.0.1/bin/ruby
+to use ruby in nginx: passenger_ruby /home/deploy/.rbenv/versions/3.0.1/bin/ruby
