@@ -35,6 +35,7 @@ gem 'devise'
 gem "ed25519"
 gem "bcrypt_pbkdf"
 gem 'capistrano-rbenv'
+gem "passenger", ">= 5.3.2", require: "phusion_passenger/rack_handler"
 
 group :development, :production do
   gem 'capistrano', '~> 3.0', require: false
