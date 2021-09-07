@@ -8,8 +8,8 @@ set :repo_url, "git@github.com:briannicholls/idid.git"
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/home/deploy/#{fetch :application}"
-
+set :deploy_to, "/var/www/#{fetch :application}"
+set :bundle_gemfile, "#{fetch :application}/Gemfile"
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
@@ -37,3 +37,5 @@ set :keep_releases, 5
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+set :passenger_in_gemfile, true
