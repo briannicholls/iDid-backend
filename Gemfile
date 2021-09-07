@@ -34,17 +34,13 @@ gem 'devise'
 # gem 'capistrano-rails'
 gem "ed25519"
 gem "bcrypt_pbkdf"
-gem 'capistrano-rbenv'
 gem "passenger", ">= 5.3.2", require: "phusion_passenger/rack_handler"
 gem 'rexml'
 
-group :development, :production do
-  gem 'capistrano', '~> 3.0', require: false
-  gem 'capistrano-passenger'
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rails', require: false
-  # gem 'capistrano-rbenv', github: 'capistrano/rbenv', require: false
-end
+gem 'capistrano', '~> 3.11'
+gem 'capistrano-rails', '~> 1.4'
+gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
