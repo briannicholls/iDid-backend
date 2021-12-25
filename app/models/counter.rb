@@ -6,8 +6,6 @@ class Counter < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates_inclusion_of :kind, in: ['default', 'weighted', 'timed']
 
-  # /models/counter.rb
-
   # returns user with most reps for this counter
   def leader(datetime)
     # filter actions in this time range
@@ -39,6 +37,5 @@ class Counter < ApplicationRecord
       counter.leader(datetime)
     }
   end
-
 
 end
