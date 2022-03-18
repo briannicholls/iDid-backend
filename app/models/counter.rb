@@ -2,6 +2,7 @@ class Counter < ApplicationRecord
   # include ActiveModel::Serialization
 
   has_many :actions
+  # enum :measurement_unit => ['minutes', 'seconds', 'lb', 'kg']
 
   validates :name, presence: true, uniqueness: true
   validates_inclusion_of :kind, in: ['default', 'weighted', 'timed']
