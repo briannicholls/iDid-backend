@@ -2,19 +2,18 @@ class API::V1::UsersController < ApplicationController
 
   # before_action :redirect_if_not_logged_in, except: :create
 
-  # def index
-  #   byebug
-  #   if params[:confirmation]
-  #
-  #   end
-  # end
-
   def show
     user = User.find_by(id: params[:id])
-    if user && user.id === current_user.id
-      render json: user, except: :password_digest
+    # render user with added info for current user
+    if user && current_user && user.id === current_user.id
+      # render json: user, except: :password_digest
+      render json: user, methods: [:name] , except: :password_digest
+
+    # render 3rd-party user
+    elsif user
+      render json: user,  methods: [:name] , except: [:password_digest]
     else
-      render json: {server_message: 'Not logged in! (users#show)'}
+      render json: {server_message: 'Not logged in! (users#show)'}, status: 401
     end
   end
 
