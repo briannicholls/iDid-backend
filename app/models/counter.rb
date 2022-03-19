@@ -7,7 +7,7 @@ class Counter < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates_inclusion_of :kind, in: ['default', 'weighted', 'timed']
 
-  # returns user with most reps for this counter
+  # returns user with most reps for this counter since datetime
   def leader(datetime)
     # filter actions in this time range
     actions_in_range = self.actions.since(datetime)

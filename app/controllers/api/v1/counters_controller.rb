@@ -14,8 +14,6 @@ class API::V1::CountersController < ApplicationController
     end
   end
 
-  # /controllers/counters_controller.rb
-
   def leaders
     if params[:q]
       if params[:q] == 'month'
