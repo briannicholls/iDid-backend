@@ -2,6 +2,10 @@
 
 Backend API for my React application found here: https://github.com/nichol88/iDid-frontend
 
+# Installation
+
+For testing locally using the frontend, start the rails server on port 3001 with `rails s -p 3001`.
+
 ## Models
 
 ### Counters
@@ -17,9 +21,8 @@ If `Counter.kind` is not `'default'`, you will need to specify `Counter.measurem
 
 An `Action` is an instance of a user performing an activity. It ties the `Counter` to the `User`, along with the number of reps (or minutes/seconds for a timed activity), and the weight (for a weightlifting activity).
 
-# Installation
 
-Download the repo, then run `rails s` to initialize the server. Default port is 3001.
+
 
 # Routes
 
