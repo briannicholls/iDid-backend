@@ -23,7 +23,7 @@ class API::V1::UsersController < ApplicationController
     if user.persisted?
       render json: user, except: :password_digest
     else
-      render json: {server_message: 'User creation failed!'}
+      render json: { errors: user.errors.full_messages.to_sentence }, status: 422
     end
   end
 
