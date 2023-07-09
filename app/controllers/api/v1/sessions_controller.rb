@@ -20,7 +20,7 @@ class API::V1::SessionsController < ApplicationController
       session[:user_id] = user.id
       render json: user
     else
-      render json: { server_message: 'Incorrect email/password combination!' }
+      render json: { server_message: 'Incorrect email/password combination!' }, status: 401
     end
   end
 
