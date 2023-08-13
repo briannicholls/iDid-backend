@@ -33,7 +33,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = {host: ENV['BACKEND_BASE_URL']}
+  config.action_mailer.default_url_options = {host: Constants::BACKEND_BASE_URL}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: true,
@@ -41,8 +41,8 @@ Rails.application.configure do
     port: 587,
     domain: "smtp.gmail.com",
     authentication: :login,
-    user_name: ENV['GMAIL_USERNAME'],
-    password: ENV['GMAIL_PASSWORD']
+    user_name: Constans::GMAIL_USERNAME,
+    password: Constans::GMAIL_PASSWORD
   }
 
   # Print deprecation notices to the Rails logger.
@@ -53,7 +53,6 @@ Rails.application.configure do
 
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
-
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
