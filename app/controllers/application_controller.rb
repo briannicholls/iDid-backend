@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::API
   include ::ActionController::Cookies
 
+  before_action :print_headers
   before_action :set_cookie_samesite_none
+
+  def print_headers
+    puts 'headers:'
+    puts request.headers
+  end
 
   def current_user
     User.find_by(id: session[:user_id])

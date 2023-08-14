@@ -7,12 +7,12 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    puts "Allowed Origins: #{Constants::CORS_ORIGINS}"
-    origins Constants::CORS_ORIGINS
+    # puts "Allowed Origins: #{Constants::CORS_ORIGINS}"
+    origins "*" #Constants::CORS_ORIGINS
 
     resource '*',
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      credentials: true
+      credentials: false # true
   end
 end
