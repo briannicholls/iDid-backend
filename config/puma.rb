@@ -5,6 +5,7 @@
 # and maximum; this matches the default thread size of Active Record.
 #
 max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
+max_threads_count = 1 if ENV.fetch("RAILS_ENV") == 'development'
 min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
 threads min_threads_count, max_threads_count
 

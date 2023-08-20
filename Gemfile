@@ -9,7 +9,7 @@ gem 'rails'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 4.3'
+gem 'puma'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 gem 'active_model_serializers'
@@ -17,8 +17,8 @@ gem 'active_model_serializers'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem 'pry'
-gem 'pry-remote'
+# gem 'pry'
+# gem 'pry-remote'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -35,17 +35,20 @@ gem 'devise'
 # gem 'capistrano-rails'
 gem "ed25519"
 gem "bcrypt_pbkdf"
-gem "passenger", ">= 5.3.2", require: "phusion_passenger/rack_handler"
+# gem "passenger", ">= 5.3.2", require: "phusion_passenger/rack_handler"
+
 gem 'rexml'
 
-gem 'capistrano', '~> 3.11'
-gem 'capistrano-rails', '~> 1.4'
-gem 'capistrano-passenger', '~> 0.2.0'
-gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
-gem 'capistrano-bundler'
+# gem 'capistrano', '~> 3.11'
+# gem 'capistrano-rails', '~> 1.4'
+# gem 'capistrano-passenger', '~> 0.2.0'
+# gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+# gem 'capistrano-bundler'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # gem 'debug'
   gem 'rspec-rails'
 end
 

@@ -14,6 +14,13 @@ class API::V1::SessionsController < ApplicationController
   end
 
   def login
+    byebug
+    puts "test"
+    testing = 2345
+    # if params[:session].nil?
+    #   throw "Missing session params!"
+    #   return
+    # end
     params[:session][:email] = params[:session][:email].downcase
     user = User.find_by(email: params[:session][:email])
     if user && user.valid_password?(params[:session][:password])

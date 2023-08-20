@@ -30,4 +30,4 @@ An `Action` is an instance of a user performing an activity. It ties the `Counte
 
 ## Development
 
-Run `rails s` to start the app on port 3000.
+Run `rails s -p 3000` to start the app on port 3000.
