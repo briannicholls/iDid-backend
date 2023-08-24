@@ -1,11 +1,11 @@
 class API::V1::SessionsController < ApplicationController
 
   def get_current_user
-      render json: current_user, except: :password_digest
+    render json: current_user, except: :password_digest
   end
 
   def get_state
-      render json: session[:state]
+    render json: session[:state]
   end
 
   def set_state
@@ -14,13 +14,6 @@ class API::V1::SessionsController < ApplicationController
   end
 
   def login
-    byebug
-    puts "test"
-    testing = 2345
-    # if params[:session].nil?
-    #   throw "Missing session params!"
-    #   return
-    # end
     params[:session][:email] = params[:session][:email].downcase
     user = User.find_by(email: params[:session][:email])
     if user && user.valid_password?(params[:session][:password])
