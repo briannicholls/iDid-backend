@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.hosts << "130b14b40eba.ngrok.app" # Add your ngrok subdomain here
+  # config.hosts << ENV['HOSTS'] # Add your ngrok subdomain here
+
   config.log_level = :debug
 
   # In the development environment your application's code is reloaded on
