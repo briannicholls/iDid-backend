@@ -3,6 +3,7 @@ class ApplicationController < ActionController::API
 
   before_action :print_headers
   before_action :set_cookie_samesite_none
+  # before_action :set_current_user
 
   def print_headers
     puts 'headers:'
@@ -33,4 +34,13 @@ class ApplicationController < ActionController::API
     response.headers['Set-Cookie'] = 'Secure;'
     response.headers['Set-Cookie'] = 'SameSite=None'
   end
+
+  private
+
+  # def set_current_user
+  #   if session[:user_id]
+  #     @current_user = User.find_by(id: params[:user_id])
+  #   end
+  # end
+
 end

@@ -1,6 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  puts "ENV['NGROK_HTTP_HOST'] = #{ENV['NGROK_HTTP_HOST']}"
   config.hosts << ENV['NGROK_HTTP_HOST'] # Add your ngrok subdomain here
   # config.hosts << ENV['HOSTS'] # Add your ngrok subdomain here
 
