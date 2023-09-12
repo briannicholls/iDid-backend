@@ -1,11 +1,11 @@
 class API::V1::SessionsController < ApplicationController
 
   def get_current_user
-      render json: current_user, except: :password_digest
+    render json: current_user, except: :password_digest
   end
 
   def get_state
-      render json: session[:state]
+    render json: session[:state]
   end
 
   def set_state
@@ -20,7 +20,7 @@ class API::V1::SessionsController < ApplicationController
       session[:user_id] = user.id
       render json: user
     else
-      render json: { server_message: 'Incorrect email/password combination!' }
+      render json: { server_message: 'Incorrect email/password combination!' }, status: 401
     end
   end
 

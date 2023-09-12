@@ -2,10 +2,6 @@
 
 Backend API for my React application found here: https://github.com/nichol88/iDid-frontend
 
-# Installation
-
-For testing locally using the frontend, start the rails server on port 3001 with `rails s -p 3001`.
-
 ## Models
 
 ### Counters
@@ -22,14 +18,16 @@ If `Counter.kind` is not `'default'`, you will need to specify `Counter.measurem
 An `Action` is an instance of a user performing an activity. It ties the `Counter` to the `User`, along with the number of reps (or minutes/seconds for a timed activity), and the weight (for a weightlifting activity).
 
 
+## Routes
 
-
-# Routes
-
-## Public
+### Public
 
 `/counters` - lists all the user-created counters that are able to be counted
 
-## Private
+### Private
 
 `/users/:id/actions` - lists all action entries for given user
+
+## Development
+
+Run `rails s -p 3000` to start the app on port 3000.

@@ -2,8 +2,10 @@ def seed
   test_user = User.create(
     fname: 'Spongebob',
     lname: 'Squarepants',
-    # password_digest: 'i<3mrkrabs',
-    email: 'fryguy99@krustykrab.com'
+    password: 'i<3mrkrabs',
+    password_confirmation: 'i<3mrkrabs',
+    email: 'fryguy99@krustykrab.com',
+    confirmed_at: Time.now
   )
 
   # puts test_user.errors.full_messages if test_user.errors.any?

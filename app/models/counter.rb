@@ -1,6 +1,4 @@
 class Counter < ApplicationRecord
-  # include ActiveModel::Serialization
-
   has_many :actions
   # enum :measurement_unit => ['minutes', 'seconds', 'lb', 'kg']
 
@@ -16,7 +14,6 @@ class Counter < ApplicationRecord
     unique_users = actions_in_range.pluck(:user_id).uniq
 
     leader = nil
-    # user_id = nil
     
     # for each unique user having performed actions in this time range for this counter
     reps = unique_users.inject(0){ |memo, user_id|

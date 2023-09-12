@@ -1,6 +1,12 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  puts "ENV['NGROK_HTTP_HOST'] = #{ENV['NGROK_HTTP_HOST']}"
+  config.hosts << ENV['NGROK_HTTP_HOST'] # Add your ngrok subdomain here
+  # config.hosts << ENV['HOSTS'] # Add your ngrok subdomain here
+
+  config.log_level = :debug
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -33,7 +39,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = {host: ENV['BACKEND_BASE_URL']}
+  config.action_mailer.default_url_options = {host: Rails.application.credentials[:backend_base_url]}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: true,
@@ -41,8 +47,8 @@ Rails.application.configure do
     port: 587,
     domain: "smtp.gmail.com",
     authentication: :login,
-    user_name: ENV['GMAIL_USERNAME'],
-    password: ENV['GMAIL_PASSWORD']
+    user_name: Rails.application.credentials[:gmail_username],
+    password: Rails.application.credentials[:gmail_password]
   }
 
   # Print deprecation notices to the Rails logger.
@@ -53,7 +59,6 @@ Rails.application.configure do
 
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
-
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true

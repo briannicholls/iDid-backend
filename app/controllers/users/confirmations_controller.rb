@@ -28,6 +28,6 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   #   super(resource_name, resource)
   # end
   def after_confirmation_path_for(resource_name, resource)
-    ENV['FRONTEND_BASE_URL']
+    Constants::FRONTEND_BASE_URL #+ '/login'
   end
 end

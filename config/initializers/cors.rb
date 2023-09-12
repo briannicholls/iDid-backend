@@ -7,13 +7,12 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    # origins 'https://idid.netlify.app'
-    # origins 'http://localhost:3000' # for local
-    origins ['https://idid.netlify.app', 'http://localhost:3000', 'http://localhost:3001', 'http://idid.ngrok.io/', 'http://idid.ngrok.io', 'https://idid.ngrok.io' ]
+    # puts "Allowed Origins: #{Constants::CORS_ORIGINS}"
+    origins "*" #Constants::CORS_ORIGINS
 
     resource '*',
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      credentials: true
+      credentials: false # true
   end
 end
