@@ -64,3 +64,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # security updates:
 gem "activestorage", ">= 6.0.3"
+
+gem "bugsnag", "~> 6.26"
