@@ -19,6 +19,17 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+class RequestLogger
+  def initialize(app)
+    @app = app
+  end
+
+  def call(env)
+    Rails.logger.info("Incoming request: #{env['REQUEST_METHOD']} #{env['REQUEST_URI']}")
+    @app.call(env)
+  end
+end
+
 module IDidBackend
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -35,5 +46,7 @@ module IDidBackend
     config.api_only = true
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore, key: '_cookie_name'
+    config.middleware.insert_before(Rack::Runtime, RequestLogger)
+
   end
 end

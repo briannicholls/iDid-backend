@@ -7,7 +7,8 @@ class ActionSerializer < ActiveModel::Serializer
   }
 
   def counter
-    {name: object.counter.name,
+    {
+      name: object.counter.name,
       kind: object.counter.kind,
       unit: object.counter.measurement_unit
     }
