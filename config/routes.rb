@@ -15,9 +15,9 @@ Rails.application.routes.draw do
       get 'leaders' => 'counters#leaders'
 
       post 'login' => 'sessions#login'
-      get 'current_user' => 'sessions#get_current_user'
+      get 'current_user' => 'sessions#current_user'
       delete 'logout' => 'sessions#destroy'
-      get 'state' => 'sessions#get_state'
+      get 'state' => 'sessions#app_state'
       post 'state' => 'sessions#set_state'
       get 'users/:id/actions' => 'actions#index'
     end

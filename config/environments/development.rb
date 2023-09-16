@@ -39,18 +39,18 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = {host: Rails.application.credentials[:backend_base_url]}
+  config.action_mailer.default_url_options = { host: Rails.application.credentials[:backend_base_url] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    enable_starttls_auto: true,
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "smtp.gmail.com",
-    authentication: :login,
-    user_name: Rails.application.credentials[:gmail_username],
-    password: Rails.application.credentials[:gmail_password]
+    :user_name => 'apikey', # This is the string literal 'apikey', NOT the ID of your API key
+    :password => ENV['SENDGRID_API_KEY'],
+    :domain => 'idid.social',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
   }
-
+  
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

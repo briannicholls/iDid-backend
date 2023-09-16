@@ -1,10 +1,9 @@
 class API::V1::SessionsController < ApplicationController
-
-  def get_current_user
+  def current_user
     render json: current_user, except: :password_digest
   end
 
-  def get_state
+  def app_state
     render json: session[:state]
   end
 
@@ -26,7 +25,6 @@ class API::V1::SessionsController < ApplicationController
 
   def destroy
     session.clear
-    render json: {server_message: 'You Logged Out!'}
+    render json: { server_message: 'You Logged Out!' }
   end
-
 end
