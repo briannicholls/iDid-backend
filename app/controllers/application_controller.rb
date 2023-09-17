@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 class ApplicationController < ActionController::API
-  before_action :authorize_request
+  before_action :authorize_request, except: %i[method]
 
   def current_user
     User.find_by(id: session[:user_id])
   end
 
   def logged_in?
-    !!current_user
+    !!@current_user
   end
 
   def encode_token(payload)

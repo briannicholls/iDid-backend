@@ -4,9 +4,8 @@ class API::V1::UsersController < ApplicationController
   def show
     user = User.find_by(id: params[:id])
     # render user with added info for current user
-    if user && current_user && user.id === current_user.id
+    if user && @current_user && user.id == @current_user.id
       render json: user, methods: [:name], except: :password_digest
-
     # render 3rd-party user
     elsif user
       render json: user, methods: [:name], except: [:password_digest]
