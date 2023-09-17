@@ -30,24 +30,16 @@ gem 'rack-cors'
 gem 'dotenv-rails'
 gem 'devise'
 
-# gem 'capistrano'
-# gem 'capistrano-rails'
 gem "ed25519"
 gem "bcrypt_pbkdf"
-# gem "passenger", ">= 5.3.2", require: "phusion_passenger/rack_handler"
 
 gem 'rexml'
 
-# gem 'capistrano', '~> 3.11'
-# gem 'capistrano-rails', '~> 1.4'
-# gem 'capistrano-passenger', '~> 0.2.0'
-# gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
-# gem 'capistrano-bundler'
+gem 'jwt'
+
+gem "bugsnag", "~> 6.26"
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # gem 'debug'
   gem 'rspec-rails'
 end
 
@@ -55,7 +47,6 @@ group :development do
   gem 'listen', '~> 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  # gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop'
   gem 'pry'
   gem 'pry-remote'
@@ -67,4 +58,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # security updates:
 gem "activestorage", ">= 6.0.3"
 
-gem "bugsnag", "~> 6.26"

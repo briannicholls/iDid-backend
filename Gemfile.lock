@@ -106,6 +106,7 @@ GEM
       concurrent-ruby (~> 1.0)
     json (2.6.3)
     jsonapi-renderer (0.2.2)
+    jwt (2.7.1)
     language_server-protocol (3.17.0.3)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -252,6 +253,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   ed25519
+  jwt
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   pry

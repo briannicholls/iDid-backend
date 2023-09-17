@@ -1,4 +1,6 @@
 class API::V1::UsersController < ApplicationController
+  skip_before_action :authorize_request, only: [:create]
+
   def show
     user = User.find_by(id: params[:id])
     # render user with added info for current user
@@ -16,7 +18,11 @@ class API::V1::UsersController < ApplicationController
   def create
     user = User.create(user_params)
     if user.persisted?
-      render json: user, except: :password_digest, status: 200
+      token = encode_token({
+                             user_id: user.id,
+                             email: user.email
+                          })
+      render json: { token:, user: user.as_json(only: %i[id email fname lname]) }, except: :password_digest, status: 200
     else
       render json: { errors: user.errors.full_messages.to_sentence }, status: 422
     end
