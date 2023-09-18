@@ -1,46 +1,31 @@
+# frozen_string_literal: true
 class ApplicationController < ActionController::API
-  include ::ActionController::Cookies
-
-  before_action :print_headers
-  before_action :set_cookie_samesite_none
-  # before_action :set_current_user
-
-  def print_headers
-    puts 'headers:'
-    puts request.headers
-  end
-
-  def current_user
-    User.find_by(id: session[:user_id])
-  end
+  before_action :authorize_request #, except: %i[method]
 
   def logged_in?
-    !!current_user
+    !!@current_user
   end
 
-  def redirect_if_not_logged_in
-    if !logged_in?
-      render json: {
-        server_message: {
-          message: "Not logged in!",
-          controller: self
-        }
-      }
-      puts 'Not logged in!'
-    end
+  def encode_token(payload)
+    JWT.encode(payload, Rails.application.secrets.secret_key_base)
   end
 
-  def set_cookie_samesite_none
-    response.headers['Set-Cookie'] = 'Secure;'
-    response.headers['Set-Cookie'] = 'SameSite=None'
+  def decode_token(token)
+    JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
   end
 
   private
 
-  # def set_current_user
-  #   if session[:user_id]
-  #     @current_user = User.find_by(id: params[:user_id])
-  #   end
-  # end
-
+  def authorize_request
+    header = request.headers['Authorization']
+    @token = header.split(' ').last if header
+    begin
+      decoded = decode_token(@token)
+      @current_user = User.find(decoded[0]['user_id'])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { errors: e.message }, status: :unauthorized
+    rescue JWT::DecodeError => e
+      render json: { errors: e.message }, status: :unauthorized
+    end
+  end
 end
