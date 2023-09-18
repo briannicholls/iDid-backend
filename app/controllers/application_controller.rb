@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 class ApplicationController < ActionController::API
-  before_action :authorize_request, except: %i[method]
-
-  def current_user
-    User.find_by(id: session[:user_id])
-  end
+  before_action :authorize_request #, except: %i[method]
 
   def logged_in?
     !!@current_user
@@ -22,9 +18,9 @@ class ApplicationController < ActionController::API
 
   def authorize_request
     header = request.headers['Authorization']
-    header = header.split(' ').last if header
+    @token = header.split(' ').last if header
     begin
-      decoded = decode_token(header)
+      decoded = decode_token(@token)
       @current_user = User.find(decoded[0]['user_id'])
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized

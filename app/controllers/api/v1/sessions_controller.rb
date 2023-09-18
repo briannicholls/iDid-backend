@@ -14,6 +14,16 @@ class API::V1::SessionsController < ApplicationController
     end
   end
 
+  def fetch_current_user
+    # Here, the @current_user instance variable should already be set by the authorize_request before_action.
+    if @current_user
+      # binding.pry
+      render json: { token: @token, user: @current_user.as_json(only: %i[id email fname lname]) }, status: :ok
+    else
+      render json: { error: 'Not Authorized' }, status: :unauthorized
+    end
+  end
+
   def app_state
     render json: session[:state]
   end

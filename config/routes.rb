@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
       # Session
       post 'login' => 'sessions#create'
-      get 'current_user' => 'sessions#current_user'
+      get 'current_user' => 'sessions#fetch_current_user'
       delete 'logout' => 'sessions#destroy'
 
       get 'state' => 'sessions#app_state'
