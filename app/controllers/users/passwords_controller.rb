@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Users::PasswordsController < Devise::PasswordsController
+  skip_before_action :authorize_request, only: [:create]
+
   # GET /resource/password/new
   # def new
   #   super
@@ -8,7 +10,21 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # POST /resource/password
   # def create
-  #   super
+  #   self.resource = resource_class.send_reset_password_instructions(resource_params)
+
+  #   if successfully_sent?(resource)
+  #     if request.format.json?
+  #       render json: { success: 'Email sent' }, status: :ok
+  #     else
+  #       respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
+  #     end
+  #   else
+  #     if request.format.json?
+  #       render json: { errors: 'Email not found' }, status: :unprocessable_entity
+  #     else
+  #       respond_with(resource)
+  #     end
+  #   end
   # end
 
   # GET /resource/password/edit?reset_password_token=abcdef

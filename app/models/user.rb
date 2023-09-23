@@ -2,14 +2,14 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable
+  # , :confirmable
   # include ActiveModel::Serialization
 
   has_many :actions
 
   has_many :invitations
   has_many :friends, class_name: :User, through: :invitations, foreign_key: :friend_id
-
 
   validates :email, uniqueness: true, presence: true
   validates :fname, presence: true
@@ -22,18 +22,17 @@ class User < ApplicationRecord
 
     # map unique counters to leader hash
     unique_counters.map do |counter|
-      {counter: counter, leader: counter.leader(datetime)}
+      { counter:, leader: counter.leader(datetime) }
     end
 
     # returns array of hashes
   end
 
   def counter_actions(counter_id)
-    self.actions.where("counter_id = ?", counter_id)
+    actions.where('counter_id = ?', counter_id)
   end
 
   def name
     "#{fname} #{lname.chars[0]}"
   end
-
 end
