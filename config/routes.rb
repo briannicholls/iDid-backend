@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {confirmations: 'users/confirmations'}
+  devise_for :users, controllers: {
+    confirmations: 'users/confirmations',
+    passwords: 'users/passwords'
+  }, defaults: { format: :json }
 
   namespace :api do
     namespace :v1 do

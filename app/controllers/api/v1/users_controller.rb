@@ -23,7 +23,7 @@ class API::V1::UsersController < ApplicationController
                           })
       render json: { token:, user: user.as_json(only: %i[id email fname lname]) }, except: :password_digest, status: 200
     else
-      render json: { errors: user.errors.full_messages.to_sentence }, status: 422
+      render json: { errors: user.errors.full_messages }, status: 422
     end
   end
 
