@@ -14,8 +14,10 @@ class Users::PasswordsController < Devise::PasswordsController
     yield resource if block_given?
 
     if successfully_sent?(resource)
+      Rails.logger.info "Successfully sent reset password instructions to #{resource.email}"
       render json: { message: 'Email sent successfully.' }, status: 200
     else
+      Rails.logger.error "Failed to send reset password instructions to #{resource.email}"
       render json: { errors: resource.errors.full_messages }, status: 422
     end
   end
