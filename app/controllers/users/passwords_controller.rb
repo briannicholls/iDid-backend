@@ -9,9 +9,15 @@ class Users::PasswordsController < Devise::PasswordsController
   # end
 
   # POST /resource/password
-  # def create
-  #  super
-  # end
+  def create
+    super do |resource|
+      if resource.errors.any?
+        # Log or render your custom error message here
+        Rails.logger.error(resource.errors.full_messages)
+        render json: { errors: resource.errors }, status: 422
+      end
+    end
+  end
 
   # GET /resource/password/edit?reset_password_token=abcdef
   # def edit
