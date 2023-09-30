@@ -13,4 +13,6 @@
 # These inflection rules are supported but not enabled by default:
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym 'API'
+
+  inflect.irregular 'unit_of_measure', 'units_of_measure'
 end
