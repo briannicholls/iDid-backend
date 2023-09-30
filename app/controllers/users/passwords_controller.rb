@@ -10,12 +10,13 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # POST /resource/password
   def create
-    super do |resource|
-      if resource.errors.any?
-        # Log or render your custom error message here
-        Rails.logger.error(resource.errors.full_messages)
-        render json: { errors: resource.errors }, status: 422
-      end
+    self.resource = resource_class.send_reset_password_instructions(resource_params)
+    yield resource if block_given?
+
+    if successfully_sent?(resource)
+      render json: { message: 'Email sent successfully.' }, status: 200
+    else
+      render json: { errors: resource.errors.full_messages }, status: 422
     end
   end
 
