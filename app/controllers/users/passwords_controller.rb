@@ -18,6 +18,7 @@ class Users::PasswordsController < Devise::PasswordsController
       render json: { message: 'Email sent successfully.' }, status: 200
     else
       Rails.logger.error "Failed to send reset password instructions to #{resource.email}"
+      Rails.logger.error resource.errors.full_messages
       render json: { errors: resource.errors.full_messages }, status: 422
     end
   end
