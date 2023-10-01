@@ -1,6 +1,7 @@
 class Counter < ApplicationRecord
   has_many :actions
-  # enum :measurement_unit => ['minutes', 'seconds', 'lb', 'kg']
+  has_many :counter_units
+  has_many :units_of_measure, through: :counter_units
 
   validates :name, presence: true, uniqueness: true
   validates_inclusion_of :kind, in: ['default', 'weighted', 'timed']

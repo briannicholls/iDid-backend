@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_01_061419) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_01_062819) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_061419) do
     t.float "weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "counter_units", force: :cascade do |t|
+    t.integer "counter_id", null: false
+    t.integer "unit_of_measure_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["counter_id", "unit_of_measure_id"], name: "index_counter_units_on_counter_id_and_unit_of_measure_id", unique: true
+    t.index ["counter_id"], name: "index_counter_units_on_counter_id"
+    t.index ["unit_of_measure_id"], name: "index_counter_units_on_unit_of_measure_id"
   end
 
   create_table "counters", force: :cascade do |t|
@@ -69,6 +79,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_061419) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "counter_units", "counters"
+  add_foreign_key "counter_units", "units_of_measure"
   add_foreign_key "invitations", "users"
   add_foreign_key "units_of_measure", "counters"
 end
