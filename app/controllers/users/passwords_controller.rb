@@ -23,6 +23,16 @@ class Users::PasswordsController < Devise::PasswordsController
     end
   end
 
+  def redirect_to_app
+    token = params[:token]
+    # development_url = "exp+idid://expo-development-client/?url=http%3A%2F%2Fidid.ngrok.io/--/reset-password?token=Nok67iVFFaq-A4FVHWXF"
+    if Rails.env.development?
+      redirect_to "exp://low94oa.nichol88.8080.exp.direct/--/reset-password?token=#{token}" :
+    else
+      redirect_to "idid://reset-password?token=#{token}"
+    end
+  end
+
   # GET /resource/password/edit?reset_password_token=abcdef
   # def edit
   #   @token = params[:reset_password_token]

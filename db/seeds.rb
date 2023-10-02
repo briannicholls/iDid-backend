@@ -2,6 +2,7 @@
 def seed
   create_default_test_user
   create_default_counters
+  create_default_measurement_units
 end
 
 def create_default_test_user
@@ -28,6 +29,15 @@ def create_default_counters
     name: 'Dead lift',
     kind: 'weighted'
   )
+end
+
+def create_default_measurement_units
+  units = [
+    { name: 'Pounds', abbreviation: 'lbs', dimension: 'weight', system: 'imperial' },
+    { name: 'Minutes', abbreviation: 'min', dimension: 'time' },
+    { name: 'Miles', abbreviation: 'mi', dimension: 'distance' }
+  ]
+  units.each { |unit| UnitOfMeasure.create(unit) }
 end
 
 seed
