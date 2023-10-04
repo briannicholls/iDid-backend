@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class ApplicationController < ActionController::API
   respond_to :html, :json
-  before_action :authorize_request #, except: %i[method]
+  before_action :authorize_request, except: %i[redirect_to_app]
 
   def logged_in?
     !!@current_user
