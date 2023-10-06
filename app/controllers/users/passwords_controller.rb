@@ -25,10 +25,18 @@ class Users::PasswordsController < Devise::PasswordsController
 
   def redirect_to_app
     token = params[:token]
-    # development_url = "exp+idid://expo-development-client/?url=http%3A%2F%2Fidid.ngrok.io/--/reset-password?token=Nok67iVFFaq-A4FVHWXF"
+    development_url = "exp+idid://expo-development-client/?url=http%3A%2F%2Fidid.ngrok.io/--/reset-password?token=Nok67iVFFaq-A4FVHWXF"
     if Rails.env.development?
       Rails.logger.info "Redirecting to development URL"
-      redirect_to "exp://low94oa.nichol88.8080.exp.direct/--/reset-password?token=#{token}"
+      # for web
+      # redirect_to development_url
+      # redirect_to "idid://localhost:19006/reset-password?token=#{token}"
+      # redirect_to "http://idid.ngrok.io/reset-password?token=#{token}"
+      # redirect_to "exp://low94oa.nichol88.8080.exp.direct/--/reset-password?token=#{token}"
+
+      # Expo Go - WORKING
+      redirect_to "exp://idid.ngrok.io/--/reset-password?token=#{token}"
+
     else
       Rails.logger.info "Redirecting to production URL deep link"
       redirect_to "idid://reset-password?token=#{token}"
