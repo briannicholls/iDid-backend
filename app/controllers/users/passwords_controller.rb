@@ -36,7 +36,6 @@ class Users::PasswordsController < Devise::PasswordsController
 
       # Expo Go - WORKING
       redirect_to "exp://idid.ngrok.io/--/reset-password?token=#{token}"
-
     else
       Rails.logger.info "Redirecting to production URL deep link"
       redirect_to "idid://reset-password?token=#{token}"

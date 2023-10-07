@@ -22,9 +22,10 @@ Rails.application.routes.draw do
       get 'leaders' => 'counters#leaders'
 
       # Session
-      post 'login' => 'sessions#create'
+      post 'login'       => 'sessions#create'
       get 'current_user' => 'sessions#fetch_current_user'
-      delete 'logout' => 'sessions#destroy'
+      delete 'logout'    => 'sessions#destroy'
+      post 'password'    => 'sessions#reset_password'
 
       # Obsolete
       # get 'state' => 'sessions#app_state'
