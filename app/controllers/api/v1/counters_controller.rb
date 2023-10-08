@@ -1,5 +1,4 @@
 class API::V1::CountersController < ApplicationController
-
   def index
     render json: Counter.all
   end
@@ -7,10 +6,9 @@ class API::V1::CountersController < ApplicationController
   def create
     counter = Counter.create(counter_params)
     if counter.persisted?
-      render json: Counter.all
+      render json: counter
     else
-      # alert('Counter could not be saved. Perhaps it already exists?')
-      render json: Counter.all
+      render_error counter.errors.full_messages
     end
   end
 
@@ -21,7 +19,7 @@ class API::V1::CountersController < ApplicationController
       elsif params[:q] == 'week'
         render json: Counter.leaders(1.week.ago)
       else
-        render json: {server_message: 'invalid time range'}
+        render json: { server_message: 'invalid time range' }
       end
     else # render all leaders
       render json: Counter.leaders(DateTime.new(2020))
@@ -33,5 +31,4 @@ class API::V1::CountersController < ApplicationController
   def counter_params
     params.require(:counter).permit(:name, :kind, :measurement_unit)
   end
-
 end
