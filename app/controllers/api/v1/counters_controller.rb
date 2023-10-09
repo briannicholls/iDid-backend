@@ -13,17 +13,11 @@ class API::V1::CountersController < ApplicationController
   end
 
   def leaders
-    if params[:q]
-      if params[:q] == 'month'
-        render json: Counter.leaders(1.month.ago)
-      elsif params[:q] == 'week'
-        render json: Counter.leaders(1.week.ago)
-      else
-        render json: { server_message: 'invalid time range' }
-      end
-    else # render all leaders
-      render json: Counter.leaders(DateTime.new(2020))
-    end
+    render json: {
+      month:    Counter.leaders(1.month.ago),
+      week:     Counter.leaders(1.week.ago),
+      all_time: Counter.leaders(DateTime.new(2020))
+    }
   end
 
   private
