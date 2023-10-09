@@ -33,7 +33,7 @@ end
 
 def create_default_measurement_units
   units = [
-    { name: 'Pounds', abbreviation: 'lbs', dimension: 'weight', system: 'imperial' },
+    { name: 'Pounds', abbreviation: 'lbs', dimension: 'weight', system: 'us_standard' },
     { name: 'Minutes', abbreviation: 'min', dimension: 'time' },
     { name: 'Miles', abbreviation: 'mi', dimension: 'distance' }
   ]

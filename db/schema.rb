@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_01_063318) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_09_015251) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,13 +53,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_063318) do
   create_table "units_of_measure", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
-    t.bigint "counter_id", null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "dimension", null: false
     t.string "system", default: "metric", null: false
-    t.index ["counter_id"], name: "index_units_of_measure_on_counter_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -83,5 +81,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_063318) do
   add_foreign_key "counter_units", "counters"
   add_foreign_key "counter_units", "units_of_measure"
   add_foreign_key "invitations", "users"
-  add_foreign_key "units_of_measure", "counters"
 end
