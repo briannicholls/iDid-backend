@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 def seed
   create_default_test_user
   create_default_counters
@@ -33,9 +34,9 @@ end
 
 def create_default_measurement_units
   units = [
-    { name: 'Pounds', abbreviation: 'lbs', dimension: 'weight', system: 'us_standard' },
+    { name: 'Pounds',  abbreviation: 'lbs', dimension: 'weight', system: 'us_standard' },
     { name: 'Minutes', abbreviation: 'min', dimension: 'time' },
-    { name: 'Miles', abbreviation: 'mi', dimension: 'distance' }
+    { name: 'Miles',   abbreviation: 'mi',  dimension: 'distance' }
   ]
   units.each { |unit| UnitOfMeasure.create(unit) }
 end

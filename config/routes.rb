@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :users do
         resources :actions
       end
+      resources :units_of_measure
 
       get 'leaders' => 'counters#leaders'
 
