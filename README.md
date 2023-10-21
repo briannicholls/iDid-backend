@@ -8,10 +8,9 @@ Backend API for my React application found here: https://github.com/nichol88/iDi
 
 `Counter`s are the things that you can count, for example, Burger Flips, Deadlifts, or Meditation.
 
-For timed activities such as meditation, the Counter will need `kind: 'timed'`.
-For weightlifting activities, the Counter may have `kind: 'weighted'`.
-Otherwise, `kind` will be `'default'`.
-If `Counter.kind` is not `'default'`, you will need to specify `Counter.measurement_unit` according to the `kind`, i.e. "seconds" for a timed activity or "kilograms" for a weighted activity.
+For timed activities such as meditation, the Counter will need `dimension: 'time'`.
+For weightlifting activities, the Counter may have `dimension: 'weight'`.
+Otherwise, `dimension` will be `'default'`.
 
 ### Actions
 

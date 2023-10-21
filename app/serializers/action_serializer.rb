@@ -11,17 +11,9 @@ class ActionSerializer < ActiveModel::Serializer
   def counter
     {
       name: object.counter.name,
-      kind: object.counter.kind,
+      dimension: object.counter.dimension,
       # unit: object.counter.measurement_unit
     }
   end
-
-  # def timed?
-  #   object.counter.kind == 'timed'
-  # end
-
-  # def weighted?
-  #   object.counter.kind == 'weighted'
-  # end
 
 end

@@ -20,15 +20,15 @@ end
 def create_default_counters
   Counter.create(
     name: 'Jumping Jacks',
-    kind: 'default'
+    dimension: 'default'
   )
   Counter.create(
     name: 'Meditation',
-    kind: 'timed'
+    dimension: 'time'
   )
   Counter.create(
     name: 'Dead lift',
-    kind: 'weighted'
+    dimension: 'weight'
   )
 end
 

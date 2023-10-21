@@ -23,6 +23,6 @@ class API::V1::CountersController < ApplicationController
   private
 
   def counter_params
-    params.require(:counter).permit(:name, :kind, :measurement_unit)
+    params.require(:counter).permit(:name, :dimension, :measurement_unit)
   end
 end
