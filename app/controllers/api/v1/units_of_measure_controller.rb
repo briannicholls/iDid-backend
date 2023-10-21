@@ -1,4 +1,4 @@
-class Api::V1::UnitsOfMeasureController < ApplicationController
+class API::V1::UnitsOfMeasureController < ApplicationController
   def index
     units_of_measure = UnitOfMeasure.all
     render json: units_of_measure
