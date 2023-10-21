@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class ActionSerializer < ActiveModel::Serializer
-  attributes :id, :reps
+  attributes :id, :reps, :value
   attribute :counter
 
-  attribute(:when) {
-    object.created_at.in_time_zone(object.user.time_zone).strftime("%D at %l:%M %p")
-  }
+  attribute(:when) do
+    object.created_at.in_time_zone(object.user.time_zone).strftime('%D at %l:%M %p')
+  end
 
   def counter
     {
@@ -14,14 +16,12 @@ class ActionSerializer < ActiveModel::Serializer
     }
   end
 
-  attribute :weight, if: :is_weighted?
+  # def timed?
+  #   object.counter.kind == 'timed'
+  # end
 
-  def is_timed?
-    object.counter.kind == 'timed' ? true : false
-  end
-
-  def is_weighted?
-    object.counter.kind == 'weighted' ? true : false
-  end
+  # def weighted?
+  #   object.counter.kind == 'weighted'
+  # end
 
 end

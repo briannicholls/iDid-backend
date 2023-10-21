@@ -24,6 +24,6 @@ class API::V1::ActionsController < ApplicationController
   private
 
   def action_params
-    params.permit(:reps, :user_id, :counter_id, :weight)
+    params.permit(:reps, :user_id, :counter_id, :value)
   end
 end

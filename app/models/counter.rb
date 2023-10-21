@@ -43,5 +43,4 @@ class Counter < ApplicationRecord
       counter.leader(datetime)
     }
   end
-
 end

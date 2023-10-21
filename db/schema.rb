@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_11_034723) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_21_162711) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_034723) do
     t.integer "counter_id"
     t.integer "user_id"
     t.integer "reps"
-    t.float "weight"
+    t.float "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "unit_of_measure_id"
