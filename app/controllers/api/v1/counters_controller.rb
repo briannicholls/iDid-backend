@@ -1,6 +1,6 @@
 class API::V1::CountersController < ApplicationController
   def index
-    render json: Counter.all
+    render json: Counter.all.order(:name)
   end
 
   def create
@@ -23,6 +23,6 @@ class API::V1::CountersController < ApplicationController
   private
 
   def counter_params
-    params.require(:counter).permit(:name, :dimension, :measurement_unit)
+    params.require(:counter).permit(:name, :dimension, :measurement_unit, :track_reps)
   end
 end

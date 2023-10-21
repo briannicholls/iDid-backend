@@ -17,13 +17,13 @@ class API::V1::ActionsController < ApplicationController
     if action.save
       render json: action
     else
-      render json: { server_message: 'Unable to create Action!' }
+      render_error action.errors.full_messages
     end
   end
 
   private
 
   def action_params
-    params.permit(:reps, :user_id, :counter_id, :value)
+    params.permit(:reps, :user_id, :counter_id, :value, :unit_of_measure_id)
   end
 end

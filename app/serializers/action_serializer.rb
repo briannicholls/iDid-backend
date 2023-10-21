@@ -12,7 +12,7 @@ class ActionSerializer < ActiveModel::Serializer
     {
       name: object.counter.name,
       dimension: object.counter.dimension,
-      # unit: object.counter.measurement_unit
+      unit: object.unit_of_measure.abbreviation,
     }
   end
 
