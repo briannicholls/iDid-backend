@@ -36,7 +36,10 @@ def create_default_measurement_units
   units = [
     { name: 'Pounds',  abbreviation: 'lbs', dimension: 'weight', system: 'us_standard' },
     { name: 'Minutes', abbreviation: 'min', dimension: 'time' },
-    { name: 'Miles',   abbreviation: 'mi',  dimension: 'distance' }
+    { name: 'Miles',   abbreviation: 'mi',  dimension: 'distance' },
+    { name: 'Kilograms', abbreviation: 'kg', dimension: 'weight', system: 'metric' },
+    { name: 'Seconds', abbreviation: 'sec', dimension: 'time' },
+    { name: 'Kilometers', abbreviation: 'km', dimension: 'distance' }
   ]
   units.each { |unit| UnitOfMeasure.create(unit) }
 end
