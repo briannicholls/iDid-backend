@@ -7,14 +7,20 @@ class Action < ApplicationRecord
   # if value is present and not zero, must have unit of measure ID, and vice versa
   validate :value_and_unit_of_measure_consistency
   # validates that actions measuring metered counters have units of measure
-  validates :unit_of_measure_id, presence: true, if: -> { counter&.metered? }
+  validates :unit_of_measure_id, presence: true, if: :metered?
 
-  scope :today, -> {Action.where('created_at >= ?', 24.hours.ago)}
-  scope :week, -> {Action.where('created_at >= ?', 1.week.ago)}
-  scope :month, -> {Action.where('created_at >= ?', 1.month.ago)}
+  scope :today, -> { Action.where('created_at >= ?', 24.hours.ago) }
+  scope :week, -> { Action.where('created_at >= ?', 1.week.ago) }
+  scope :month, -> { Action.where('created_at >= ?', 1.month.ago) }
 
   scope :total_reps, -> {sum(:reps)}
   scope :recent, -> {Action.order('created_at DESC limit 10')}
+
+
+
+  def metered?
+    counter.metered?
+  end
 
   def self.since(datetime)
     Action.where('created_at >= ? ', datetime)
