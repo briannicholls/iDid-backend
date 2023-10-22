@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class ApplicationController < ActionController::API
   respond_to :html, :json
-  before_action :authorize_request, except: %i[redirect_to_app]
+  before_action :authorize_request, except: %i[redirect_to_app reset_password]
 
   def logged_in?
     !!@current_user
@@ -13,6 +13,10 @@ class ApplicationController < ActionController::API
 
   def decode_token(token)
     JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
+  end
+
+  def render_error(errors)
+    render json: { errors: }, status: :unprocessable_entity
   end
 
   private

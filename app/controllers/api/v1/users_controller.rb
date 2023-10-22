@@ -17,10 +17,7 @@ class API::V1::UsersController < ApplicationController
   def create
     user = User.create(user_params)
     if user.persisted?
-      token = encode_token({
-                             user_id: user.id,
-                             email: user.email
-                          })
+      token = user.encode_jwt
       render json: { token:, user: user.as_json(only: %i[id email fname lname]) }, except: :password_digest, status: 200
     else
       render json: { errors: user.errors.full_messages }, status: 422

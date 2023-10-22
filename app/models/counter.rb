@@ -4,7 +4,11 @@ class Counter < ApplicationRecord
   has_many :units_of_measure, through: :counter_units
 
   validates :name, presence: true, uniqueness: true
-  validates_inclusion_of :kind, in: ['default', 'weighted', 'timed']
+  validates_inclusion_of :dimension, in: ['default', 'weight', 'time']
+
+  def metered?
+    dimension != 'default'
+  end
 
   # returns user with most reps for this counter since datetime
   def leader(datetime)
@@ -43,5 +47,4 @@ class Counter < ApplicationRecord
       counter.leader(datetime)
     }
   end
-
 end

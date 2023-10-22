@@ -35,4 +35,8 @@ class User < ApplicationRecord
   def name
     "#{fname} #{lname.chars[0]}"
   end
+
+  def encode_jwt
+    JWT.encode({ user_id: id, email: }, Rails.application.secrets.secret_key_base)
+  end
 end
