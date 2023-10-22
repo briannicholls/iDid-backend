@@ -6,6 +6,10 @@ class Counter < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates_inclusion_of :dimension, in: ['default', 'weight', 'time']
 
+  def metered?
+    dimension != 'default'
+  end
+
   # returns user with most reps for this counter since datetime
   def leader(datetime)
     # filter actions in this time range
