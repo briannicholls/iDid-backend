@@ -5,7 +5,7 @@ class ActionSerializer < ActiveModel::Serializer
   attribute :counter
 
   attribute(:when) do
-    object.created_at.in_time_zone(object.user.time_zone).strftime('%D at %l:%M %p')
+    object.created_at
   end
 
   def counter
