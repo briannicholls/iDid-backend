@@ -3,25 +3,31 @@ class Counter < ApplicationRecord
   has_many :counter_units
   has_many :units_of_measure, through: :counter_units
 
-  validates :name, presence: true, uniqueness: true
-  validates_inclusion_of :dimension, in: ['default', 'weight', 'time']
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates_inclusion_of :dimension, in: %w[default weight time]
+
+  before_save :titleize_name
 
   def metered?
     dimension != 'default'
   end
 
+  def titleize_name
+    self.name = name.titleize
+  end
+
   # returns user with most reps for this counter since datetime
   def leader(datetime)
     # filter actions in this time range
-    actions_in_range = self.actions.since(datetime)
+    actions_in_range = actions.since(datetime)
 
     # get unique users having actions for this counter
     unique_users = actions_in_range.pluck(:user_id).uniq
 
     leader = nil
-    
+
     # for each unique user having performed actions in this time range for this counter
-    reps = unique_users.inject(0){ |memo, user_id|
+    reps = unique_users.inject(0) do |memo, user_id|
       # get those actions
       acs = actions_in_range.where('user_id = ?', user_id)
       # sum the reps
@@ -33,9 +39,9 @@ class Counter < ApplicationRecord
       else
         memo
       end
-    }
+    end
     if leader
-      { counter_name: self.name, name: leader.name, reps: reps, user_id: leader.id }
+      { counter_name: name, name: leader.name, reps:, user_id: leader.id }
     else
       {}
     end
@@ -43,8 +49,8 @@ class Counter < ApplicationRecord
 
   # returns leaders since datetime
   def self.leaders(datetime)
-    Counter.all.map{ |counter|
+    Counter.all.map do |counter|
       counter.leader(datetime)
-    }
+    end
   end
 end
