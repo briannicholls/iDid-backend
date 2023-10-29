@@ -6,7 +6,7 @@ class API::V1::ActionsController < ApplicationController
       actions = Action.where(user_id: params[:user_id]).order(created_at: :desc)
       render json: actions
     else
-      render json: { server_message: 'Could not get actions for user!' }, status:
+      render_error ['Could not get actions for user!']
     end
   end
 
