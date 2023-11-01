@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_21_200039) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_01_163210) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_200039) do
     t.datetime "updated_at", null: false
     t.boolean "track_reps", default: false
     t.integer "created_by"
+    t.string "name_singular"
+    t.string "name_plural"
   end
 
   create_table "invitations", force: :cascade do |t|
