@@ -14,6 +14,9 @@ class Counter < ApplicationRecord
 
   def titleize_name
     self.name = name.titleize
+    # ascertain singular and plural names
+    self.name_singular = name.singularize
+    self.name_plural = name.pluralize
   end
 
   # returns user with most reps for this counter since datetime
