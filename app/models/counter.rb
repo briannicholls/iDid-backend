@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Counter < ApplicationRecord
   has_many :actions
   has_many :counter_units
