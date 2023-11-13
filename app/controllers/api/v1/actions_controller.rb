@@ -22,7 +22,6 @@ class API::V1::ActionsController < ApplicationController
   end
 
   def delete
-    # binding.pry
     action = Action.find_by(id: params[:id])
     if action&.destroy
       render json: action
