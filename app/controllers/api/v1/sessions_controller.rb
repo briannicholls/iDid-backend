@@ -2,7 +2,7 @@ class API::V1::SessionsController < ApplicationController
   skip_before_action :authorize_request, only: %i[create destroy]
 
   def create
-    user = User.find_by_email(params[:session][:email])
+    user = User.find_by_email(params[:session][:email].strip)
     if user.nil?
       render json: { errors: ['User not found'] }, status: :not_found
     elsif !user.valid_password?(params[:session][:password])

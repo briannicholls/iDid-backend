@@ -6,7 +6,7 @@ class API::V1::CountersController < ApplicationController
   def create
     counter = Counter.create(counter_params)
     if counter.persisted?
-      render json: counter
+      render json: counter, status: :created
     else
       render_error counter.errors.full_messages
     end

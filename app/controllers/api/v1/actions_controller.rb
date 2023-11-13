@@ -21,6 +21,15 @@ class API::V1::ActionsController < ApplicationController
     end
   end
 
+  def delete
+    action = Action.find_by(id: params[:id])
+    if action&.destroy
+      render json: action
+    else
+      render_error action.errors.full_messages
+    end
+  end
+
   private
 
   def action_params
