@@ -1,47 +1,40 @@
 # frozen_string_literal: true
 
+require 'yaml'
+
 def seed
   create_default_test_user
   create_default_counters
-  create_default_measurement_units
+  load_units_of_measure
 end
 
 def create_default_test_user
-  User.create(
-    fname: 'Spongebob',
-    lname: 'Squarepants',
-    password: 'i<3mrkrabs',
-    password_confirmation: 'i<3mrkrabs',
-    email: 'fryguy99@krustykrab.com',
-    confirmed_at: Time.now
-  )
+  User.find_or_create_by!(email: 'fryguy99@krustykrab.com') do |user|
+    user.fname = 'Spongebob'
+    user.lname = 'Squarepants'
+    user.password = 'i<3mrkrabs'
+    user.password_confirmation = 'i<3mrkrabs'
+    user.confirmed_at = Time.now
+  end
 end
 
 def create_default_counters
-  Counter.create(
-    name: 'Jumping Jacks',
-    dimension: 'default'
-  )
-  Counter.create(
-    name: 'Meditation',
-    dimension: 'time'
-  )
-  Counter.create(
-    name: 'Dead lift',
-    dimension: 'weight'
-  )
+  counters = [
+    { name: 'Jumping Jacks', dimension: 'default' },
+    { name: 'Meditation', dimension: 'time' },
+    { name: 'Dead lift', dimension: 'weight' }
+  ]
+
+  counters.each do |counter_attrs|
+    Counter.find_or_create_by!(name: counter_attrs[:name]) do |counter|
+      counter.dimension = counter_attrs[:dimension]
+    end
+  end
 end
 
-def create_default_measurement_units
-  units = [
-    { name: 'Pounds',  abbreviation: 'lbs', dimension: 'weight', system: 'us_standard' },
-    { name: 'Minutes', abbreviation: 'min', dimension: 'time' },
-    { name: 'Miles',   abbreviation: 'mi',  dimension: 'distance' },
-    { name: 'Kilograms', abbreviation: 'kg', dimension: 'weight', system: 'metric' },
-    { name: 'Seconds', abbreviation: 'sec', dimension: 'time' },
-    { name: 'Kilometers', abbreviation: 'km', dimension: 'distance' }
-  ]
-  units.each { |unit| UnitOfMeasure.create(unit) }
+def load_units_of_measure
+  units = YAML.load_file(Rails.root.join('db', 'units_of_measure.yml'))
+  units.each { |unit| UnitOfMeasure.find_or_create_by!(unit) }
 end
 
 seed

@@ -23,33 +23,17 @@ class Counter < ApplicationRecord
 
   # returns user with most reps for this counter since datetime
   def leader(datetime)
-    # filter actions in this time range
-    actions_in_range = actions.since(datetime)
+    # Filter actions in this time range and sum reps for each user
+    user_reps = actions.since(datetime)
+                       .group(:user_id)
+                       .select(:user_id, 'SUM(reps) as total_reps')
+                       .order('total_reps DESC')
+                       .first
 
-    # get unique users having actions for this counter
-    unique_users = actions_in_range.pluck(:user_id).uniq
+    return {} unless user_reps
 
-    leader = nil
-
-    # for each unique user having performed actions in this time range for this counter
-    reps = unique_users.inject(0) do |memo, user_id|
-      # get those actions
-      acs = actions_in_range.where('user_id = ?', user_id)
-      # sum the reps
-      reps = acs.sum(:reps)
-
-      if reps > memo
-        leader = User.find_by(id: user_id)
-        reps
-      else
-        memo
-      end
-    end
-    if leader
-      { counter_name: name, name: leader.name, reps:, user_id: leader.id }
-    else
-      {}
-    end
+    leader = User.find_by(id: user_reps.user_id)
+    { counter_name: name, name: leader.name, reps: user_reps.total_reps, user_id: leader.id }
   end
 
   # returns leaders since datetime
