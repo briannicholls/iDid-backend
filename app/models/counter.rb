@@ -43,3 +43,20 @@ class Counter < ApplicationRecord
     end
   end
 end
+
+# def leader_with_time(datetime)
+#   # Assuming `value` in `actions` represents the time in different units
+#   # and `unit_of_measure_id` links to a table with conversion factors to seconds
+
+#   actions_in_range = actions.since(datetime)
+#                             .joins(:unit_of_measure)
+#                             .select('actions.user_id', 'SUM(actions.value * units_of_measure.conversion_factor_to_seconds) as total_time')
+#                             .group(:user_id)
+#                             .order('total_time DESC')
+#                             .first
+
+#   return {} unless actions_in_range
+
+#   leader = User.find_by(id: actions_in_range.user_id)
+#   { counter_name: name, name: leader.name, total_time: actions_in_range.total_time, user_id: leader.id }
+# end

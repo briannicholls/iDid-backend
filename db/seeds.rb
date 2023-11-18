@@ -34,7 +34,15 @@ end
 
 def load_units_of_measure
   units = YAML.load_file(Rails.root.join('db', 'units_of_measure.yml'))
-  units.each { |unit| UnitOfMeasure.find_or_create_by!(unit) }
+  units.each do |unit_attrs|
+    unit = UnitOfMeasure.find_or_initialize_by(name: unit_attrs['name'], abbreviation: unit_attrs['abbreviation'])
+
+    # Assign attributes regardless of whether it's a new record or existing one
+    unit.assign_attributes(unit_attrs)
+
+    # Save or update the record
+    unit.save!
+  end
 end
 
 seed
