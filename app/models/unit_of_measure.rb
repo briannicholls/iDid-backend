@@ -12,7 +12,7 @@ class UnitOfMeasure < ApplicationRecord
     when 'weight'
       'kg'
     when 'time'
-      's'
+      'sec'
     when 'distance'
       'm'
     end
