@@ -5,7 +5,7 @@ class Counter < ApplicationRecord
   has_many :counter_units
   has_many :units_of_measure, through: :counter_units
 
-  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 2, maximum: 30 }
+  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 2, maximum: 30 }, obscenity: true
   validates_inclusion_of :dimension, in: %w[default weight time], if: -> { dimension.present? }
 
   before_save :titleize_name

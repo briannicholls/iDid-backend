@@ -39,6 +39,8 @@ gem 'jwt'
 
 gem "bugsnag", "~> 6.26"
 
+gem 'profanity_filter'
+
 group :development, :test do
   gem 'rspec-rails'
 end
