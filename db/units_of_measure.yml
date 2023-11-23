@@ -1,0 +1,48 @@
+# Units of Measure
+
+# Each unit includes its name, abbreviation, dimension, system (if applicable),
+# and conversion factors to standard units (kilograms for weight, seconds for time, kilometers for distance)
+
+
+# Dimension: Weight
+
+- name: 'Pounds'
+  abbreviation: 'lbs'
+  dimension: 'weight'
+  system: 'us_standard'
+  conversion_factor_to_kilograms: 0.453592
+
+- name: 'Kilograms'
+  abbreviation: 'kg'
+  dimension: 'weight'
+  system: 'metric'
+  conversion_factor_to_kilograms: 1
+
+# Dimension: Time
+
+- name: 'Seconds'
+  abbreviation: 'sec'
+  dimension: 'time'
+  conversion_factor_to_seconds: 1
+
+- name: 'Minutes'
+  abbreviation: 'min'
+  dimension: 'time'
+  conversion_factor_to_seconds: 60
+
+- name: 'Hours'
+  abbreviation: 'hr'
+  dimension: 'time'
+  conversion_factor_to_seconds: 3600
+
+# Dimension: Distance
+
+- name: 'Miles'
+  abbreviation: 'mi'
+  dimension: 'distance'
+  conversion_factor_to_kilometers: 1.60934
+
+- name: 'Kilometers'
+  abbreviation: 'km'
+  dimension: 'distance'
+  conversion_factor_to_kilometers: 1

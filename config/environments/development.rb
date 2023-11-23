@@ -5,7 +5,7 @@ Rails.application.configure do
   config.hosts << ENV['NGROK_HTTP_HOST'] # Add your ngrok subdomain here
   # config.hosts << ENV['HOSTS'] # Add your ngrok subdomain here
 
-  config.log_level = :debug
+  config.log_level = :info
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

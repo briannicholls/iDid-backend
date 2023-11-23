@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class ActionSerializer < ActiveModel::Serializer
-  attributes :id, :reps, :value
+  belongs_to :unit_of_measure, serializer: UnitOfMeasureSerializer
+  
+  attributes :id, :reps, :value, :unit_of_measure
   attribute :counter
 
   attribute(:when) do
@@ -12,7 +14,8 @@ class ActionSerializer < ActiveModel::Serializer
     {
       name: object.counter.name,
       dimension: object.counter.dimension,
-      unit: object.unit_of_measure&.abbreviation,
+      # unit: object.unit_of_measure&.name,
+      # unit_abbreviation: object.unit_of_measure&.abbreviation
     }
   end
 

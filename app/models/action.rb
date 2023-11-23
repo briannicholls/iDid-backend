@@ -13,21 +13,19 @@ class Action < ApplicationRecord
   scope :week, -> { Action.where('created_at >= ?', 1.week.ago) }
   scope :month, -> { Action.where('created_at >= ?', 1.month.ago) }
 
-  scope :total_reps, -> {sum(:reps)}
-  scope :recent, -> {Action.order('created_at DESC limit 10')}
-
-
+  scope :total_reps, -> { sum(:reps) }
+  scope :recent, -> { Action.order('created_at DESC limit 10') }
 
   def metered?
     counter.metered?
   end
 
   def self.since(datetime)
-    Action.where('created_at >= ? ', datetime)
+    Action.where('actions.created_at >= ? ', datetime)
   end
 
   def since(datetime)
-    Action.where('user_id = ? AND created_at >= ? ', self.user.id, datetime)
+    Action.where('user_id = ? AND created_at >= ? ', user.id, datetime)
   end
 
   private

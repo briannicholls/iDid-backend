@@ -6,4 +6,15 @@ class UnitOfMeasure < ApplicationRecord
 
   scope :metric, -> { where(system: 'metric') }
   scope :us_standard, -> { where(system: 'us_standard') }
+
+  def self.common_unit(dimension)
+    case dimension
+    when 'weight'
+      'kg'
+    when 'time'
+      'sec'
+    when 'distance'
+      'm'
+    end
+  end
 end
