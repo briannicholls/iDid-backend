@@ -5,8 +5,11 @@ class Counter < ApplicationRecord
   has_many :counter_units
   has_many :units_of_measure, through: :counter_units
 
-  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 2, maximum: 30 }, obscenity: true
-  validates_inclusion_of :dimension, in: %w[default weight time], if: -> { dimension.present? }
+  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 2, maximum: 30 },
+                   obscenity: true
+  validates :dimension, presence: true, inclusion: { in: %w[default weight time distance] }
+  # track_reps should be true if dimension is default
+  validates :track_reps, inclusion: { in: [true] }, if: -> { dimension == 'default' }
 
   before_save :titleize_name
 
