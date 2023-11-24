@@ -39,7 +39,7 @@ class Counter < ApplicationRecord
 
     # Start building the query
     actions_in_range = actions.since(datetime)
-                              .joins(:unit_of_measure)
+                              .left_joins(:unit_of_measure)
                               .group(:user_id)
 
     # Determine the select statement based on dimension and track_reps
