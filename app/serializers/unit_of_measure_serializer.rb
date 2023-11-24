@@ -1,6 +1,6 @@
 
 class UnitOfMeasureSerializer < ActiveModel::Serializer
-  attributes :id, :name, :names, :abbreviation, :abbreviations
+  attributes :id, :name, :names, :abbreviation, :abbreviations, :dimension
 
   def names
     {
