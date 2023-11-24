@@ -14,6 +14,8 @@ class API::V1::ActionsController < ApplicationController
     action = Action.new(action_params)
     counter = Counter.find_by(id: params[:counter_id])
     action.counter_id = counter.id if counter
+    # TODO: fix on FE - it sometimes sends unit_of_measure_id regardless of dimension
+    action.unit_of_measure_id = nil unless counter.dimension != 'default'
     if action.save
       render json: action
     else
