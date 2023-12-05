@@ -27,12 +27,13 @@ Rails.application.routes.draw do
       get 'current_user' => 'sessions#fetch_current_user'
       delete 'logout'    => 'sessions#destroy'
       post 'password'    => 'sessions#reset_password'
-
+      
       # Obsolete
       # get 'state' => 'sessions#app_state'
       # post 'state' => 'sessions#set_state'
-
+      
       get 'users/:id/actions' => 'actions#index'
+
     end
   end
 end
