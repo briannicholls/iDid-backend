@@ -6,7 +6,7 @@ class Counter < ApplicationRecord
   has_many :units_of_measure, through: :counter_units
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 2, maximum: 30 },
-                   obscenity: true
+                   obscenity: true, nonsense: true
   validates :dimension, presence: true, inclusion: { in: %w[default weight time distance] }
   # track_reps should be true if dimension is default
   validates :track_reps, inclusion: { in: [true] }, if: -> { dimension == 'default' }
@@ -92,5 +92,13 @@ class Counter < ApplicationRecord
       units: UnitOfMeasure.common_unit(dimension),
       track_reps:
     }
+  end
+
+  private
+
+  def validate_name_for_nonsense
+    unless name =~ /\A[a-zA-Z\s]+\z/
+      errors.add(:name, 'must contain only letters and spaces')
+    end
   end
 end
