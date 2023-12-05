@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 class ApplicationController < ActionController::API
   respond_to :html, :json
-  before_action :authorize_request, except: %i[redirect_to_app reset_password]
+  before_action :authorize_request, except: %i[redirect_to_app reset_password leaders]
+  before_action :conditionally_authorize_request, only: [:leaders]
 
   def logged_in?
     !!@current_user
@@ -32,5 +33,13 @@ class ApplicationController < ActionController::API
     rescue JWT::DecodeError => e
       render json: { errors: e.message }, status: :unauthorized
     end
+  end
+
+  def public_request?
+    params[:public] == 'true'
+  end
+
+  def conditionally_authorize_request
+    authorize_request unless public_request?
   end
 end

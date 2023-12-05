@@ -1,4 +1,6 @@
 class API::V1::CountersController < ApplicationController
+  before_action :conditionally_authorize_request, only: [:leaders]
+
   def index
     render json: Counter.all.order(:name)
   end
