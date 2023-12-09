@@ -6,9 +6,9 @@ class User < ApplicationRecord
   # , :confirmable
   # include ActiveModel::Serialization
 
-  has_many :actions
+  has_many :actions, dependent: :destroy
 
-  has_many :invitations
+  has_many :invitations, dependent: :destroy
   has_many :friends, class_name: :User, through: :invitations, foreign_key: :friend_id
 
   validates :email, uniqueness: true, presence: true

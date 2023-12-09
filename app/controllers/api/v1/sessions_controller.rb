@@ -1,5 +1,6 @@
 class API::V1::SessionsController < ApplicationController
   skip_before_action :authorize_request, only: %i[create destroy]
+  # before_action :conditionally_authorize_request, only: [:fetch_current_user]
 
   def create
     user = User.find_by_email(params[:session][:email].strip.downcase)
@@ -14,12 +15,7 @@ class API::V1::SessionsController < ApplicationController
   end
 
   def fetch_current_user
-    # Here, the @current_user instance variable should already be set by the authorize_request before_action.
-    if @current_user
-      render json: { token: @token, user: @current_user.as_json(only: %i[id email fname lname]) }, status: :ok
-    else
-      render json: { error: 'Not Authorized' }, status: :unauthorized
-    end
+    render json: { token: @token, user: @current_user.as_json(only: %i[id email fname lname]) }, status: :ok
   end
 
   def reset_password
@@ -34,15 +30,6 @@ class API::V1::SessionsController < ApplicationController
     else
       render_error(['Token is invalid or expired'])
     end
-  end
-
-  def app_state
-    render json: session[:state]
-  end
-
-  def set_state
-    session[:state] = params[:session][:_json]
-    render json: session[:state]
   end
 
   def destroy

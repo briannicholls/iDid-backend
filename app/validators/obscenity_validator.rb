@@ -1,4 +1,6 @@
 class ObscenityValidator < ActiveModel::EachValidator
+  # Error messages
+  # TODO: put these in a table and add a randomizer
   PHRASES = [
     "should be, as wise and mindful, it must remain, hmm.",
     "should always be above reproach, I deduce.",
@@ -23,8 +25,8 @@ class ObscenityValidator < ActiveModel::EachValidator
     "ought to bubble with the harmony and joy of an underwater realm.",
     "should be as quirky and kind as the words of a time-traveling explorer.",
     "needs the integrity and bravery of a steadfast defender."
-  ]
-  
+  ].freeze
+
   # validate each attribute passed in via validator
   def validate_each(record, attribute, value)
     # Replace this with your obscenity check logic
@@ -39,5 +41,4 @@ class ObscenityValidator < ActiveModel::EachValidator
   def contains_obscene_word?(value)
     ProfanityFilter::Base.profane?(value)
   end
-  
 end

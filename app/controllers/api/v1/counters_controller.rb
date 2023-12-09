@@ -1,4 +1,5 @@
 class API::V1::CountersController < ApplicationController
+
   def index
     render json: Counter.all.order(:name)
   end
