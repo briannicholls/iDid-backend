@@ -3,7 +3,6 @@ class API::V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :destroy]
 
   def show
-    # @user = User.find_by(id: params[:id])
     # render user with added info for current user
     if @user && @current_user && @user.id == @current_user.id
       render json: @user, methods: [:name], except: :password_digest

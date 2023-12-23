@@ -16,6 +16,8 @@ class Action < ApplicationRecord
   scope :total_reps, -> { sum(:reps) }
   scope :recent, -> { Action.order('created_at DESC limit 10') }
 
+  scope :for_user, ->(user) { user ? Action.where(user_id: user.id) : Action.none }
+
   def metered?
     counter.metered?
   end
