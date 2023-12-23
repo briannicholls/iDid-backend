@@ -23,10 +23,11 @@ class API::V1::ActionsController < ApplicationController
     end
   end
 
-  def delete
-    action = Action.find_by(id: params[:id])
+  def destroy
+    action = Action.find(params[:id])
     if action&.destroy
-      render json: action
+      actions = Action.for_user(@current_user).order(created_at: :desc)
+      render json: actions
     else
       render_error action.errors.full_messages
     end
