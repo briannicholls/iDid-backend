@@ -7,7 +7,12 @@ class API::V1::CountersController < ApplicationController
   def create
     counter = Counter.new(counter_params)
     counter.dimension = 'default' if counter.dimension.blank?
-    counter.name = counter.name.pluralize if counter.track_reps == true
+    if counter.track_reps == true
+      counter.name = counter.name.strip.pluralize
+    else
+      counter.name = counter.name.strip
+    end
+    counter.created_by = @current_user.id if @current_user
     if counter.save
       render json: counter, status: :created
     else
