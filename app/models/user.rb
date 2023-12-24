@@ -33,7 +33,7 @@ class User < ApplicationRecord
   end
 
   def name
-    "#{fname} #{lname.chars[0]}"
+    "#{fname} #{lname&.chars&.first}"
   end
 
   def encode_jwt
