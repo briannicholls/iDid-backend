@@ -39,6 +39,11 @@ class API::V1::SessionsController < ApplicationController
     render json: { server_message: 'You Logged Out!' }
   end
 
+  def show_reset_password_form
+    @token = params[:token]
+    render 'api/v1/sessions/reset_password'
+  end
+
   private
 
   def render_success(user)

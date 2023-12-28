@@ -12,13 +12,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :routines
-      resources :actions
-      resources :counters
+      resources :routines, :actions, :counters, :units_of_measure
       resources :users do
         resources :actions
       end
-      resources :units_of_measure
 
       get 'leaders' => 'counters#leaders'
 
@@ -26,7 +23,10 @@ Rails.application.routes.draw do
       post 'login'       => 'sessions#create'
       get 'current_user' => 'sessions#fetch_current_user'
       delete 'logout'    => 'sessions#destroy'
-      post 'password'    => 'sessions#reset_password'
+
+      # Password Reset
+      get 'reset_password' => 'sessions#show_reset_password_form', as: :reset_password_form
+      post 'password' => 'sessions#reset_password'
 
       get 'users/:id/actions' => 'actions#index'
     end
