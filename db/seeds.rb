@@ -28,6 +28,7 @@ def create_default_counters
   counters.each do |counter_attrs|
     Counter.find_or_create_by!(name: counter_attrs[:name]) do |counter|
       counter.dimension = counter_attrs[:dimension]
+      counter.track_reps = true if counter_attrs[:dimension] == 'default'
     end
   end
 end

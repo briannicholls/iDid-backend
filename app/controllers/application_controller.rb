@@ -1,7 +1,9 @@
 # frozen_string_literal: true
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception, unless: -> { request.format.json? }
+
   respond_to :html, :json
-  before_action :authorize_request, except: %i[redirect_to_app reset_password leaders]
+  before_action :authorize_request, except: %i[redirect_to_app reset_password leaders show_reset_password_form]
   before_action :conditionally_authorize_request, only: [:leaders]
 
   def logged_in?
@@ -41,5 +43,16 @@ class ApplicationController < ActionController::API
 
   def conditionally_authorize_request
     authorize_request unless public_request?
+  end
+
+  # Checks if the request is from a mobile client
+  def mobile_request?
+    # request.headers['Client-Type'] == 'Mobile'
+    user_agent = request.user_agent
+    if user_agent =~ /Mobile|webOS|Android/
+      true
+    else
+      false
+    end
   end
 end

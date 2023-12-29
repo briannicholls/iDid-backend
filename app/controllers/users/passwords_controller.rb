@@ -25,20 +25,13 @@ class Users::PasswordsController < Devise::PasswordsController
 
   def redirect_to_app
     token = params[:token]
-    development_url = "exp+idid://expo-development-client/?url=http%3A%2F%2Fidid.ngrok.io/--/reset-password?token=Nok67iVFFaq-A4FVHWXF"
-    if Rails.env.development?
-      Rails.logger.info "Redirecting to development URL"
-      # for web
-      # redirect_to development_url
-      # redirect_to "idid://localhost:19006/reset-password?token=#{token}"
-      # redirect_to "http://idid.ngrok.io/reset-password?token=#{token}"
-      # redirect_to "exp://low94oa.nichol88.8080.exp.direct/--/reset-password?token=#{token}"
-
-      # Expo Go - WORKING
-      redirect_to "exp://idid.ngrok.io/--/reset-password?token=#{token}"
+    user_agent = request.user_agent
+    if user_agent =~ /Mobile|webOS|Android/
+      # Mobile redirection logic
+      redirect_to mobile_deep_link_url(token)
     else
-      Rails.logger.info "Redirecting to production URL deep link"
-      redirect_to "idid://reset-password?token=#{token}"
+      # Desktop redirection logic
+      redirect_to api_v1_reset_password_form_path(token:)
     end
   end
 
@@ -81,4 +74,12 @@ class Users::PasswordsController < Devise::PasswordsController
   # def after_sending_reset_password_instructions_path_for(resource_name)
   #   super(resource_name)
   # end
+
+  def mobile_deep_link_url(token)
+    if Rails.env.development?
+      "exp://idid.ngrok.io/--/reset-password?token=#{token}"
+    else
+      "idid://reset-password?token=#{token}"
+    end
+  end
 end

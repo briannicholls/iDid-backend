@@ -15,7 +15,7 @@ class API::V1::SessionsController < ApplicationController
   end
 
   def fetch_current_user
-    return if !@token || !@current_user || params[:public]
+    return if !@token && !@current_user && params[:public]
 
     render json: { token: @token, user: @current_user.as_json(only: %i[id email fname lname]) }, status: :ok
   end
@@ -25,7 +25,12 @@ class API::V1::SessionsController < ApplicationController
 
     if user&.reset_password_period_valid?
       if user.reset_password(reset_password_params[:new_password], reset_password_params[:new_password_confirmation])
-        render_success(user)
+        if mobile_request?
+          render_success(user)
+        else
+          # Render a simple success message for web clients
+          render json: { message: 'Password reset successfully' }, status: :ok
+        end
       else
         render_error(user.errors.full_messages)
       end
@@ -37,6 +42,11 @@ class API::V1::SessionsController < ApplicationController
   def destroy
     session.clear
     render json: { server_message: 'You Logged Out!' }
+  end
+
+  def show_reset_password_form
+    @token = params[:token]
+    render 'api/v1/sessions/reset_password'
   end
 
   private
