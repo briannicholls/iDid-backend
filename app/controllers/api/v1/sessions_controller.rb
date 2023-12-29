@@ -15,7 +15,7 @@ class API::V1::SessionsController < ApplicationController
   end
 
   def fetch_current_user
-    return if !@token || !@current_user || params[:public]
+    return if !@token && !@current_user && params[:public]
 
     render json: { token: @token, user: @current_user.as_json(only: %i[id email fname lname]) }, status: :ok
   end

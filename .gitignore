@@ -32,7 +32,8 @@
 .env
 .rbenv-vars
 
-
 /config/credentials/production.key
 
 /config/credentials/development.key
+
+notes.txt
