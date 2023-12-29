@@ -44,4 +44,15 @@ class ApplicationController < ActionController::Base
   def conditionally_authorize_request
     authorize_request unless public_request?
   end
+
+  # Checks if the request is from a mobile client
+  def mobile_request?
+    # request.headers['Client-Type'] == 'Mobile'
+    user_agent = request.user_agent
+    if user_agent =~ /Mobile|webOS|Android/
+      true
+    else
+      false
+    end
+  end
 end

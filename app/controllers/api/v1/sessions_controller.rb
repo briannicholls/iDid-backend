@@ -25,7 +25,12 @@ class API::V1::SessionsController < ApplicationController
 
     if user&.reset_password_period_valid?
       if user.reset_password(reset_password_params[:new_password], reset_password_params[:new_password_confirmation])
-        render_success(user)
+        if mobile_request?
+          render_success(user)
+        else
+          # Render a simple success message for web clients
+          render json: { message: 'Password reset successfully' }, status: :ok
+        end
       else
         render_error(user.errors.full_messages)
       end
