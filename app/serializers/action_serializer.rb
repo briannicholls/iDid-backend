@@ -3,7 +3,7 @@
 class ActionSerializer < ActiveModel::Serializer
   belongs_to :unit_of_measure, serializer: UnitOfMeasureSerializer
 
-  attributes :id, :reps, :value, :unit_of_measure
+  attributes :id, :reps, :value, :unit_of_measure, :counter_id
   attribute :counter
 
   attribute(:when) do
