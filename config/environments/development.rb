@@ -39,12 +39,12 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: ENV['NGROK_HTTP_HOST'] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :user_name => 'apikey', # This is the string literal 'apikey', NOT the ID of your API key
     :password => ENV['SENDGRID_API_KEY'],
-    :domain => 'idid.social',
+    :domain => 'brian-nicholls.com',
     :address => 'smtp.sendgrid.net',
     :port => 587,
     :authentication => :plain,
