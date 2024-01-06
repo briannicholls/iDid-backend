@@ -4,7 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   # , :confirmable
-  # include ActiveModel::Serialization
 
   has_many :actions, dependent: :destroy
 

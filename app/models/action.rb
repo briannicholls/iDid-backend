@@ -36,7 +36,7 @@ class Action < ApplicationRecord
     if value.present? && value != 0 && unit_of_measure_id.blank?
       errors.add(:unit_of_measure_id, 'must be present if value is non-zero')
     elsif unit_of_measure_id.present? && (value.blank? || value.zero?)
-      errors.add(:value, 'must be non-zero if unit of measure ID is present')
+      errors.add(:value, 'must be greater than zero')
     end
   end
 end

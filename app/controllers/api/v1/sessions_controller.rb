@@ -10,14 +10,14 @@ class API::V1::SessionsController < ApplicationController
       render json: { errors: ['Incorrect password'] }, status: :unauthorized
     else # Generate token
       token = user.encode_jwt
-      render json: { token:, user: user.as_json(only: %i[id email fname lname]) }, status: :ok
+      render json: { token:, user: UserSerializer.new(user) }, status: :ok
     end
   end
 
   def fetch_current_user
     return if !@token && !@current_user && params[:public]
 
-    render json: { token: @token, user: @current_user.as_json(only: %i[id email fname lname]) }, status: :ok
+    render json: { token: @token, user: UserSerializer.new(@current_user) }, status: :ok
   end
 
   def reset_password
@@ -54,7 +54,7 @@ class API::V1::SessionsController < ApplicationController
   def render_success(user)
     render json: {
       token: user.encode_jwt,
-      user: user.as_json(only: %i[id email fname lname])
+      user: UserSerializer.new(user)
     }, except: :password_digest, status: 200
   end
 
