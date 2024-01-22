@@ -83,6 +83,7 @@ class Counter < ApplicationRecord
 
     leader = User.find_by(id: leader_record.user_id)
     {
+      counter_id: id,
       counter_name: name,
       name: leader&.name,
       total_reps: leader_record.try(:total_reps),

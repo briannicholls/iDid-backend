@@ -28,6 +28,10 @@ class API::V1::CountersController < ApplicationController
     }
   end
 
+  def show
+    render json: Counter.find(params[:id])
+  end
+
   private
 
   def counter_params
