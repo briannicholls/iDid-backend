@@ -8,13 +8,22 @@ class API::V1::CountersController < ApplicationController
     counter = Counter.new(counter_params)
     counter.dimension = 'default' if counter.dimension.blank?
     if counter.track_reps == true
-      counter.name = counter.name.strip.pluralize
+      counter.name = counter.name.strip
     else
       counter.name = counter.name.strip
     end
     counter.created_by = @current_user.id if @current_user
     if counter.save
       render json: counter, status: :created
+    else
+      render_error counter.errors.full_messages
+    end
+  end
+
+  def update
+    counter = Counter.find(params[:id])
+    if counter.update(counter_params)
+      render json: counter
     else
       render_error counter.errors.full_messages
     end

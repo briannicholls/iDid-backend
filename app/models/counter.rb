@@ -98,8 +98,8 @@ class Counter < ApplicationRecord
   private
 
   def validate_name_for_nonsense
-    unless name =~ /\A[a-zA-Z\s]+\z/
-      errors.add(:name, 'must contain only letters and spaces')
-    end
+    return if name =~ /\A[a-zA-Z\s()-]+\z/
+
+    errors.add(:name, 'must not contain illegal characters')
   end
 end
