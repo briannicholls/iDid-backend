@@ -4,8 +4,8 @@ class UnitOfMeasure < ApplicationRecord
 
   validates :name, :abbreviation, presence: true, uniqueness: true
 
-  scope :metric, -> { where(system: 'metric') }
-  scope :us_standard, -> { where(system: 'us_standard') }
+  scope :metric, -> { where(system: %w[both metric]) }
+  scope :us_standard, -> { where(system: %w[both us_standard]) }
 
   def self.common_unit(dimension)
     case dimension
