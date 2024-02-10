@@ -18,6 +18,14 @@ class Counter < ApplicationRecord
   scope :timed?, -> { where(dimension: 'time') }
   scope :reps?, -> { where(track_reps: true) }
 
+  scope :for_user, ->(user_id) { joins(:actions).where(actions: { user_id: }).order('actions.created_at DESC') }
+  scope :order_by_user_activities_and_name, lambda { |user_id|
+                                              select('counters.*, MAX(actions.created_at) as last_action_date')
+                                                .joins("LEFT JOIN actions ON actions.counter_id = counters.id AND actions.user_id = #{user_id}")
+                                                .group('counters.id')
+                                                .order(Arel.sql('CASE WHEN MAX(actions.created_at) IS NULL THEN 1 ELSE 0 END, MAX(actions.created_at) DESC, counters.name'))
+                                            }
+
   def metered?
     dimension != 'default'
   end

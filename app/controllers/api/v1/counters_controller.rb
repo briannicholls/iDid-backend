@@ -1,7 +1,19 @@
 class API::V1::CountersController < ApplicationController
 
   def index
-    render json: Counter.all.order(:name)
+    # if current user is present, order counters by user's most recent counter
+    counters = Counter.all.order(:name)
+    # TODO: remove version check after 2.5.1 deploys
+    if @current_user && current_version && Gem::Version.new(current_version) >= Gem::Version.new('2.5.1')
+      render json: {
+        recent:  counters.for_user(@current_user.id),
+        counters:
+      }
+    elsif current_version && Gem::Version.new(current_version) >= Gem::Version.new('2.5.1')
+      render json: {recent: [], counters:}
+    else
+      render json: counters
+    end
   end
 
   def create

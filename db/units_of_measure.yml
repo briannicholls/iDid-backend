@@ -24,16 +24,19 @@
   abbreviation: 'sec'
   dimension: 'time'
   conversion_factor_to_seconds: 1
+  system: both
 
 - name: 'Minutes'
   abbreviation: 'min'
   dimension: 'time'
   conversion_factor_to_seconds: 60
+  system: both
 
 - name: 'Hours'
   abbreviation: 'hr'
   dimension: 'time'
   conversion_factor_to_seconds: 3600
+  system: both
 
 # Dimension: Distance
 
@@ -41,8 +44,10 @@
   abbreviation: 'mi'
   dimension: 'distance'
   conversion_factor_to_kilometers: 1.60934
+  system: 'us_standard'
 
 - name: 'Kilometers'
   abbreviation: 'km'
   dimension: 'distance'
   conversion_factor_to_kilometers: 1
+  system: 'metric'

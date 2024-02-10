@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
     render json: { errors: }, status: :unprocessable_entity
   end
 
+  def current_version
+    request.headers['HTTP_X_APP_VERSION']
+  end
+
   private
 
   def authorize_request
