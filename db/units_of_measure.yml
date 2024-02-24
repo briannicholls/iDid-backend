@@ -51,3 +51,29 @@
   dimension: 'distance'
   conversion_factor_to_kilometers: 1
   system: 'metric'
+
+# Dimension: Mass
+
+- name: 'Grams'
+  abbreviation: 'g'
+  dimension: 'mass'
+  conversion_factor_to_kilograms: 0.001
+  system: 'metric'
+
+- name: 'Kilograms'
+  abbreviation: 'kg'
+  dimension: 'mass'
+  conversion_factor_to_kilograms: 1
+  system: 'metric'
+
+- name: 'Ounces'
+  abbreviation: 'oz'
+  dimension: 'mass'
+  conversion_factor_to_kilograms: 0.0283495
+  system: 'us_standard'
+
+- name: 'Pounds'
+  abbreviation: 'lbs'
+  dimension: 'mass'
+  conversion_factor_to_kilograms: 0.453592
+  system: 'us_standard'

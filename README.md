@@ -1,6 +1,7 @@
 # iDid API
 
-Backend API for my React application found here: https://github.com/nichol88/iDid-frontend
+Backend API for my [React application](https://linktr.ee/idid_app).
+[React Native Repo here](https://github.com/nichol88/iDid-frontend) (private for the foreseeable future)
 
 ## Models
 
@@ -29,4 +30,17 @@ An `Action` is an instance of a user performing an activity. It ties the `Counte
 
 ## Development
 
+Add the following environment variables. View `./sample.env` for examples.
+`NGROK_HTTP_HOST`
+`DATABASE_USERNAME`
+`DATABASE_PASSWORD`
+`SENDGRID_DEVELOPMENT_KEY`
+
 Run `rails s -p 3000` to start the app on port 3000.
+
+## Production
+Set the following using `rails credentials:edit`:
+
+```bash
+sendgrid_production_key: your_key_for_production
+```
