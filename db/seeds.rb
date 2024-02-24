@@ -26,7 +26,8 @@ def create_default_counters
   ]
 
   counters.each do |counter_attrs|
-    Counter.find_or_create_by!(name: counter_attrs[:name]) do |counter|
+    puts "Creating counter: #{counter_attrs[:name]}"
+    Counter.find_or_create_by(name: counter_attrs[:name]) do |counter|
       counter.dimension = counter_attrs[:dimension]
       counter.track_reps = true if counter_attrs[:dimension] == 'default'
     end
@@ -36,7 +37,10 @@ end
 def load_units_of_measure
   units = YAML.load_file(Rails.root.join('db', 'units_of_measure.yml'))
   units.each do |unit_attrs|
-    unit = UnitOfMeasure.find_or_initialize_by(name: unit_attrs['name'], abbreviation: unit_attrs['abbreviation'])
+    puts "Creating unit: #{unit_attrs['name']} (#{unit_attrs['abbreviation']}) for #{unit_attrs['dimension']}"
+
+    unit = UnitOfMeasure.find_or_initialize_by(name: unit_attrs['name'], abbreviation: unit_attrs['abbreviation'],
+                                               dimension: unit_attrs['dimension'])
 
     # Assign attributes regardless of whether it's a new record or existing one
     unit.assign_attributes(unit_attrs)
