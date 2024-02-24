@@ -1,7 +1,7 @@
 # iDid API
 
 Backend API for my [React application](https://linktr.ee/idid_app).
-[React Native Repo here](https://github.com/nichol88/iDid-frontend) (private for the foreseeable future)
+[React Native Repo here](https://github.com/nichol88/iDid-frontend) (private for the foreseeable future) 
 
 ## Models
 
