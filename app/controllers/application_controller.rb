@@ -11,11 +11,11 @@ class ApplicationController < ActionController::Base
   end
 
   def encode_token(payload)
-    JWT.encode(payload, Rails.application.secrets.secret_key_base)
+    JWT.encode(payload, ENV['SECRET_KEY_BASE'])
   end
 
   def decode_token(token)
-    JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
+    JWT.decode(token, ENV['SECRET_KEY_BASE'], true, algorithm: 'HS256')
   end
 
   def render_error(errors)
