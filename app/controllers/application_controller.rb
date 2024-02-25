@@ -35,11 +35,12 @@ class ApplicationController < ActionController::Base
   def authorize_request
     header = request.headers['Authorization']
     @token = header.split(' ').last if header
+    Rails.logger.info "Token: #{@token}"
     begin
       decoded = decode_token(@token)
       @current_user = User.find(decoded[0]['user_id'])
     rescue ActiveRecord::RecordNotFound => e
-      render json: { errors: e.message }, status: :unauthorized
+      render json: { errors: e.message }, status: :not_found
     rescue JWT::DecodeError => e
       render json: { errors: e.message }, status: :unauthorized
     end
