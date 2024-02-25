@@ -7,7 +7,7 @@ class Counter < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 2, maximum: 30 },
                    obscenity: true, nonsense: true
-  validates :dimension, presence: true, inclusion: { in: %w[default weight time distance] }
+  validates :dimension, presence: true, inclusion: { in: %w[default weight time distance mass] }
   # track_reps should be true if dimension is default
   validates :track_reps, inclusion: { in: [true] }, if: -> { dimension == 'default' }
 
