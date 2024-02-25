@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def current_user
+    @current_user
+  end
+
   def authorize_request
     header = request.headers['Authorization']
     @token = header.split(' ').last if header

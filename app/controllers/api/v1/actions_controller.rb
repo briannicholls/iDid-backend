@@ -33,6 +33,11 @@ class API::V1::ActionsController < ApplicationController
     end
   end
 
+  def feed
+    actions = @current_user.feed
+    render json: actions
+  end
+
   private
 
   def action_params

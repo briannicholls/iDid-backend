@@ -61,7 +61,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     user_name: 'apikey', # This is the string literal 'apikey', NOT the ID of your API key
-    password: Rails.application.credentials[:sendgrid_api_key],
+    password: ENV['SENDGRID_PRODUCTION_KEY'],
     domain: 'brian-nicholls.com',
     address: 'smtp.sendgrid.net',
     port: 587,

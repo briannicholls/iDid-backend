@@ -2,7 +2,8 @@ class UnitOfMeasure < ApplicationRecord
   has_many :counter_units
   has_many :counters, through: :counter_units
 
-  validates :name, :abbreviation, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { scope: :dimension }
+  validates :abbreviation, presence: true, uniqueness: { scope: :dimension }
 
   scope :metric, -> { where(system: %w[both metric]) }
   scope :us_standard, -> { where(system: %w[both us_standard]) }
