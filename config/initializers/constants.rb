@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Constants
-  FRONTEND_BASE_URL = Rails.application.credentials[:frontend_base_url]
-  CORS_ORIGINS      = Rails.application.credentials[:cors_origins].split(',').map(&:strip)
+  FRONTEND_BASE_URL = ENV['FRONTEND_BASE_URL']
+  CORS_ORIGINS      = ENV['CORS_ORIGINS'].split(',').map(&:strip)
 
   # For development only; Heroku uses URL for production
-  DATABASE_USERNAME = Rails.application.credentials[:database_username]
-  DATABASE_PASSWORD = Rails.application.credentials[:database_password]
+  DATABASE_USERNAME = ENV['DATABASE_USERNAME']
+  DATABASE_PASSWORD = ENV['DATABASE_PASSWORD']
 end
