@@ -53,6 +53,6 @@ class User < ApplicationRecord
   end
 
   def encode_jwt
-    JWT.encode({ user_id: id, email: }, Rails.application.secrets.secret_key_base)
+    JWT.encode({ user_id: id, email: }, ENV['SECRET_KEY_BASE'])
   end
 end
