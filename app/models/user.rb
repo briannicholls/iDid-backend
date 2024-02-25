@@ -7,8 +7,13 @@ class User < ApplicationRecord
 
   has_many :actions, dependent: :destroy
 
-  has_many :invitations, dependent: :destroy
-  has_many :friends, class_name: :User, through: :invitations, foreign_key: :friend_id
+  # Relationships where this user is the follower
+  has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
+  has_many :following, through: :followed_users, source: :followed
+
+  # Relationships where this user is being followed
+  has_many :follower_users, foreign_key: :following_id, class_name: 'Follow'
+  has_many :followers, through: :follower_users, source: :follower
 
   validates :email, uniqueness: true, presence: true
   validates :fname, presence: true

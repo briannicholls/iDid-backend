@@ -1,6 +1,7 @@
 class API::V1::UsersController < ApplicationController
   skip_before_action :authorize_request, only: [:create]
-  before_action :set_user, only: [:show, :destroy]
+  before_action :set_user, only: %i[show destroy follow]
+  serialization_scope :current_user
 
   def show
     # render user with added info for current user
@@ -8,7 +9,7 @@ class API::V1::UsersController < ApplicationController
       render json: @user, methods: [:name], except: :password_digest
     # render 3rd-party user
     elsif @user
-      render json: @user, methods: [:name], except: [:password_digest]
+      render json: @user
     else
       render json: { server_message: 'Not logged in! (users#show)' }, status: 401
     end
@@ -26,6 +27,22 @@ class API::V1::UsersController < ApplicationController
 
   def destroy
     render json: @user.destroy
+  end
+
+  def follow
+    # if user is already followed, unfollow
+    if @current_user.followed_users.find_by(following_id: @user.id)
+      @current_user.followed_users.find_by(following_id: @user.id).destroy
+      render json: @user
+    else
+      follow = @current_user.followed_users.build(following_id: @user.id)
+      follow.save
+      if follow.persisted?
+        render json: @user
+      else
+        render json: { errors: follow.errors.full_messages }, status: 422
+      end
+    end
   end
 
   private

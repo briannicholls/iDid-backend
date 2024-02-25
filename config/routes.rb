@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :routines, :actions, :counters, :units_of_measure
       resources :users do
         resources :actions
+        post 'follow', on: :member
       end
 
       get 'leaders' => 'counters#leaders'
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
       post 'password' => 'sessions#reset_password'
 
       get 'users/:id/actions' => 'actions#index'
+
     end
   end
 end
