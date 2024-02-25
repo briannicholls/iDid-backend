@@ -19,6 +19,14 @@ class User < ApplicationRecord
   validates :fname, presence: true
   validates :lname, presence: true
 
+  # Get recent actions from followed users
+  def feed
+    followed_user_ids = "SELECT following_id FROM follows WHERE follower_id = :user_id"
+    Action.where("user_id IN (#{followed_user_ids})", user_id: id)
+          .includes(:user) # Optional, to reduce N+1 queries
+          .order(created_at: :desc)
+  end
+
   def self.leaders_since(datetime)
     # get unique counters for this time frame
     actions = Action.since(datetime)

@@ -40,11 +40,23 @@
 
 # Dimension: Distance
 
+- name: 'Feet'
+  abbreviation: 'ft'
+  dimension: 'distance'
+  conversion_factor_to_kilometers: 0.0003048
+  system: 'us_standard'
+
 - name: 'Miles'
   abbreviation: 'mi'
   dimension: 'distance'
   conversion_factor_to_kilometers: 1.60934
   system: 'us_standard'
+
+- name: 'Meters'
+  abbreviation: 'm'
+  dimension: 'distance'
+  conversion_factor_to_kilometers: 0.001
+  system: 'metric'
 
 - name: 'Kilometers'
   abbreviation: 'km'

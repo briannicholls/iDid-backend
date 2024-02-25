@@ -18,6 +18,8 @@ Rails.application.routes.draw do
         post 'follow', on: :member
       end
 
+      get 'feed' => 'actions#feed'
+
       get 'leaders' => 'counters#leaders'
 
       # Session
