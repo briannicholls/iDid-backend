@@ -2,6 +2,7 @@
 
 class ActionSerializer < ActiveModel::Serializer
   belongs_to :unit_of_measure, serializer: UnitOfMeasureSerializer
+  belongs_to :user, serializer: UserSerializer
 
   attributes :id, :reps, :value, :unit_of_measure, :counter_id
   attribute :counter
