@@ -8,11 +8,11 @@ class User < ApplicationRecord
   has_many :actions, dependent: :destroy
 
   # Relationships where this user is the follower
-  has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
+  has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow', dependent: :destroy
   has_many :following, through: :followed_users, source: :following
 
   # Relationships where this user is being followed
-  has_many :follower_users, foreign_key: :following_id, class_name: 'Follow'
+  has_many :follower_users, foreign_key: :following_id, class_name: 'Follow', dependent: :destroy
   has_many :followers, through: :follower_users, source: :follower
 
   validates :email, uniqueness: true, presence: true
