@@ -12,14 +12,14 @@ class ActionSerializer < ActiveModel::Serializer
     object.created_at
   end
 
-  def counter
-    {
-      name: object&.counter&.name,
-      dimension: object&.counter&.dimension
-      # unit: object.unit_of_measure&.name,
-      # unit_abbreviation: object.unit_of_measure&.abbreviation
-    }
-  end
+  # def counter
+  #   {
+  #     name: object&.counter&.name,
+  #     dimension: object&.counter&.dimension
+  #     # unit: object.unit_of_measure&.name,
+  #     # unit_abbreviation: object.unit_of_measure&.abbreviation
+  #   }
+  # end
 
   def user_name
     object.user&.name
