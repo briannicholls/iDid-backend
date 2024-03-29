@@ -29,17 +29,13 @@ gem 'rack-cors'
 
 gem 'dotenv-rails'
 gem 'devise'
-
 gem "ed25519"
 gem "bcrypt_pbkdf"
-
 gem 'rexml'
-
 gem 'jwt'
-
 gem "bugsnag", "~> 6.26"
-
 gem 'profanity_filter'
+gem 'exponent-server-sdk'
 
 group :development, :test do
   gem 'rspec-rails'

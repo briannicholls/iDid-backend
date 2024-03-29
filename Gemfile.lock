@@ -99,6 +99,10 @@ GEM
       railties (>= 3.2)
     ed25519 (1.3.0)
     erubi (1.12.0)
+    ethon (0.16.0)
+      ffi (>= 1.15.0)
+    exponent-server-sdk (0.1.0)
+      typhoeus
     ffi (1.15.5)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -231,6 +235,8 @@ GEM
     spring (4.1.1)
     thor (1.2.2)
     timeout (0.4.0)
+    typhoeus (1.4.1)
+      ethon (>= 0.9.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
@@ -254,6 +260,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   ed25519
+  exponent-server-sdk
   jwt
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
